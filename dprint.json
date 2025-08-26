@@ -3,15 +3,9 @@
     "quoteStyle": "preferSingle",
     "semiColons": "asi"
   },
-  "json": {
-  },
-  "markdown": {
-  },
-  "excludes": [
-    "**/node_modules",
-    "**/*-lock.json",
-    "slides"
-  ],
+  "json": {},
+  "markdown": {},
+  "excludes": ["**/node_modules", "**/*-lock.json", "slides"],
   "plugins": [
     "https://plugins.dprint.dev/typescript-0.93.0.wasm",
     "https://plugins.dprint.dev/json-0.19.1.wasm",

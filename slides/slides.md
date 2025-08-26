@@ -11,25 +11,7 @@ title: Exploring Advanced Type Level Techniques
 hideInToc: true
 ---
 
-
-# DISCOVERING GRAFFLE
-
-<br>
-
-## And Some of its TypeScript Techniques
-
-<span style="font-size: 0.6rem;color:hsla(45, 50%, 80%, 1);">
-  <!-- Animal Emojis Edition -->
-  <div class="ml-1 inline-flex flex-row gap-2">
-    <fxemoji-goat />
-    <fxemoji-wolfface />
-    <fxemoji-octopus />
-    <fxemoji-dragonside />
-    <fxemoji-honeybee />
-    <fxemoji-spurtingwhale />
-  </div>
-</span>
-
+# Imagining the Future of GraphQL Documentation Tooling
 
 ---
 layout: statement
@@ -37,7 +19,7 @@ layout: statement
 
 # Plan
 
-45 minutes
+30 minutes
 
 <div style="text-align: left;">
 
@@ -47,14 +29,11 @@ layout: statement
 
 </div>
 
-
 ---
 layout: statement
 ---
 
 # `Part 1` <br> Discovering Graffle
-
-
 
 ---
 
@@ -70,8 +49,6 @@ layout: statement
 
 <img src="./assets/website.png" class="absolute right--90 top--25 scale-70" style="filter: grayscale(0.5)" />
 
-
-
 ---
 layout: statement
 ---
@@ -83,8 +60,7 @@ layout: statement
 <a class="emoji-link" href="cursor://file//Users/jasonkuhrt/projects/graffle/tech-talk-2024-11/demos/1-gql.ts"><fxemoji-goat /></a>
 
 ---
-layout: image
-title: Components Overview
+layout: imagetitle: Components Overview
 ---
 
 <style>
@@ -103,7 +79,6 @@ title: Components Overview
 </style>
 
 <img src="./assets/components.png" class="h-full ml-auto mr-auto" style="display:block;filter: invert(1) hue-rotate(280deg);" />
-
 
 ---
 layout: two-cols-header
@@ -125,7 +100,6 @@ layout: two-cols-header
 - Request pipeline
 - Custom Scalars
 
-
 ::right::
 
 ## Unstable (ish)
@@ -134,7 +108,6 @@ layout: two-cols-header
 - Extensions
 - Output configuration
 - CLI
-
 
 ---
 
@@ -191,7 +164,7 @@ layout: statement
 
 - Write library code
 - Ask questions on ... (leverage [TypeScript Bug Workbench](https://www.typescriptlang.org/dev/bug-workbench/))
-  - Stack Overflow, often answered by [jcalz](https://stackoverflow.com/users/2887218/jcalz) 
+  - Stack Overflow, often answered by [jcalz](https://stackoverflow.com/users/2887218/jcalz)
   - [TypeScript Discord](https://discord.com/invite/typescript)
   - [ArkType Discord](https://discord.com/invite/xEzdc3fJQC) ([David Blass](https://github.com/ssalbdivad))
   - [Effect Discord](https://discord.com/invite/effect-ts)
