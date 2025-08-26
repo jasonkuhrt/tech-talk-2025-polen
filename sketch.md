@@ -1,90 +1,243 @@
-## Introduction
+# Introduction
 
 - I am an open source developer working at The Guild
 - We have been thinking and experimenting this year on GraphQL API documentation
-- We looked at the landscape and didn’t find anything checking all these boxes
+- We noticed that the landscape doesn’t have tooling meeting these characteristics
   - Open Source
   - GraphQL Native
   - Actively Maintained
   - Featureful, e.g.:
     - Reference Generator
-    - Playgrounds
+    - Playground
     - User/Project Context
-- I’m here to share some of our thinking and a prototype called Polen
+- I’m here to share some thoughts about GraphQL documentation and a prototype we’re calling Polen
 
-## Ideas
+# Note: Personas
 
-- Architecture Of a Tool
-  - We want something that spans turn key to DIY
-  - Turn key: Framework (composed libraries)
-  - DYI: Libraries
-  - Framework supports declarative style, prototypes, content focused teams, automatic improvements (e.g. interface stays same, internals optimize)
-  - Libraries support an ejectability target for framework, encourages sustainable architecture (e.g. forcing function to consider separation of concerns), allows piecemeal adoption meeting developers where they are, contributes reusable blocks back to the community rising tide for all boats
-- Versioning
-  - Can happen even with GraphQL (cite few real world examples)
-  - Changelog versus versions
-- Changelog
-  - We want to keep users informed and engaged, build their confidence, show off your efforts
-  - Changes in the schema are not 1:1 with versions of the API
-  - Categorize changes e.g. breaking vs non-breaking, deprecations, etc.
-  - Support notification subscriptions on schema paths
-- Reference Documentation
-  - Lean into the graph nature
-  - Schema paths should be deeply addressable
-  - Rich markdown descriptions
-  - Highlight deprecations
-- Last Mile Schema Augmentations
-  - Flexibility, decoupled, asynchronous
-  - Try things out, hot fixes
-- Content
-  - We need guides to help our users navigate our platforms and concepts and show examples
-  - We need marketing to help communicate our vision and story
-  - Boiler plate topics automated
-    - Authentication
-    - Introspection
-  - GraphQL Document Code Blocks
-    - Seamless Multiple client support, start native syntax but don’t stop there
-    - Bake in the popular ones and make it extensible
-    - Seamless reference links across all client types
-    - Versioning support; authors write code block variants in native syntax, app shows contextually relevant one;
-- Playgrounds
-  - …
-- User & Project Context
-  - Support user context, and their projects
-  - Support sign in, project selection, environment selection, token automation for playgrounds, traffic metrics, relate traffic to schema parts, filter reference by only what’s used by your selected project, etc.
-  - Its easy to imagine collaboration next, shared persisted playground documents, etc.
-  - A lot of this is not new, but we haven’t seen it all come together in one modern modular open source tool kit for GraphQL (or any API technology for that matter)
-- Themes
-  - Avoid Silos/Corners/Isolation between Guides Playground Reference Project
-    - Our current tools make it easier for us to create these things in isolation than integrated
-    - But that doesn’t match the ideal user experience
-    - Seamless navigation between them, go even further and allow co-location
-    - Think about it like a work bench, not a book
+- "Authors": people building a developer portal
+- "Developers": people using the API that the developer portal is about
 
-## Practical
+# Characteristics Of Interest
 
-- Polen
-  - Our prototype
-  - Framework
-    - CLI
-    - API
-  - Stack
-    - Vite Plugin, Rolldown, Radix Themes, React, React Router, Code Hike, Tree Sitter, Hono
-    - Future: RSC (React Server Components), PandaCSS, Effect
-  - Multiple build architectures: SSG, SSR
-- Learnings
-  - Rehype, Remark, … Regraph?
-    - We don’t seem to have a widespread project that allows building rich custom experiences over GraphQL document ASTs
-  - Vite is a deep powerful engine with a lively community
-    - Notable happenings include active on an official RSC plugin and imminent Rolldown with follow up goal of Vite bundling symmetry between dev and build
-    - Personally discovered a steep learning curve, integration of many elements, landscape changes measured by the month, varying code execution points and life cycles (app client, app server, dev time, build time, CLI time, imports resolution, virtual modules, cache, HMR, tree shaking, …), etc.
-    - Build on top of existing framework? Different tradeoffs, often not designed to be “wrapped”, likely going to have to learn building blocks sooner or later and they can still deliver a good abstraction levels e.g. recent Vite RSC plugin with new and related React Router RSC work look to be great framework building blocks
+## Documentation Kinds
 
-## Conclusion
+Authors should be able to present with different kinds of documentation.
 
-- What’s next
-  - Begin identifying valuable libraries for the community?
-  - No roadmap!
-  - Try it out, give us feedback
-  - Join us on GitHub discussions on the Polen repo
-  - Looking for sponsors to continue active development
+1. Guides:
+   - Topic oriented (getting started, authorization, etc.)
+   - Coarse grained
+   - Typically manually written
+   - ultimately free form
+2. Examples:
+   - Task oriented (how to do X with Y)
+   - Medium grained (practical, link between guides and reference)
+   - Typically manually written
+3. Reference:
+   - Interface oriented (inputs, outputs, etc.)
+   - Fine grained
+   - Typically generated in part or whole from a schema
+
+## Relatable Content
+
+Authors should be able to easily manage connections between content kinds.
+
+- Reference-to-Guide: Reference docs for GraphQL fields sensitive to authorization include connections to a guide about authorization
+- Guide-to-Example: An authorization guide includes connections to examples that implicate authorization
+- etc.
+
+## Developer Context
+
+It is common for APIs to have large surface areas used in different ways by developers.
+
+A developer should be able to filter, highlight, etc. content that is relevant to their projects.
+
+A developer should be able to sign into the docs and select among their projects/environments to peruse the documentation in a way useful to them. For example:
+
+In reference:
+
+- Focus reference to types, fields, etc. used in actual requests
+- See request metrics next to types, fields etc.
+  In playground:
+  - Automated token management
+  - Save documents for later use and reference
+    In examples:
+  - Lead with client kind that is actually in use by the project
+    In general:
+- Pin content for fast access: reference paths, examples, saved playground documents, etc.
+
+## Developer Collaboration
+
+Building on top of context, developers should be able to share context across a team, e.g. saved documents or pins.
+
+## Abstraction Levels
+
+Authors should be able to adopt a tool at their desired abstraction level, each level building upon the former.
+
+1. Libraries
+   - Building blocks
+   - Use cases: Brown field, incremental adoption, tangental goals
+   - Benefits: Control, flexibility, radical customization
+   - Blocks: Provided
+   - Approach: Owned
+   - Deployment: Owned
+2. Framework
+   - Opinionated library composition
+   - Use cases: Green field, prototypes, MVPs, content focused teams
+   - Benefit: Rapid development (use a cow path), easy upgrades (declarative means intent is decoupled from implementation)
+   - Audience: Content focused teams
+   - Blocks: Provided
+   - Approach: Provided
+   - Deployment: Author
+3. SaaS
+   - Turn key hosted solution
+   - Use cases: Framework + zero ops
+   - Benefit: Zero ops, focus on content, ultra rapid development, preview deployments, GitHub integration, etc.
+   - Blocks: Provided
+   - Approach: Provided
+   - Deployment: Provided
+
+## Architecture Kinds
+
+Authors should be able to choose the architecture that best fits their needs. If they are using developer context features a portable server should easily available, but if they aren't using such features, they should be able to shed the server.
+
+1. SSG
+   - Static HTML pages
+   - Deployment: static
+   - Benefits: SEO, serverless
+   - Use cases: Public documentation
+2. SPA
+   - Client Application
+   - Deployment: static
+   - Benefits: serverless, fast simple builds
+   - Use cases: Prototypes, internal docuentation
+3. SSR
+   - Server+Client Application
+   - Benefits: SEO, Developer context and collaboration features
+
+## Reference Addressability
+
+Reference should be deeply addressable e.g. a default value at argument at field at type at API version.
+
+## Reference Views
+
+Reference should be viewable in different ways playing to different strengths.
+
+1. Graph
+   - Feeling: Workbench, Macro, top of the mountain, surveying the landscape
+   - Good for: Exploration, building schema-level mental model, discover relationships, themes, understand dense and sparse spots
+2. Tree
+   - Feeling: Workbench, Micro, Starting from a trailhead, walking along paths
+   - Good for: Drilling, building type-level mental model
+3. Page
+   - Feeling: familiar, focused, stable
+   - Good for: addressability, sharing, saving
+
+## Reference Augmentations
+
+Authors should be empowered to add/change descriptions on schema elements.
+
+Motivations may include:
+
+- arbitrary experimentation
+- temporary hot fixes
+- localization
+- A/B testing
+- interactive features
+
+## API Versioning
+
+Authors should be able to present different versions of their API.
+
+Even if GraphQL reduces the need for API versioning, authors should not be cornered in on this topic.
+
+## API Revisions
+
+Authors should be able to show their developers a timeline of API changes. Motivation: help developers stay confident and informed about the API.
+
+Revisions should be:
+
+- Connected with reference, e.g.:
+  - "Field foo added in revision bar"
+  - If breaking changes within revisions, possibility of ghosted fields/types/etc. for posterity
+- Categorized e.g.:
+  - breaking
+  - non-breaking
+
+## Guides Boilerplate
+
+Authors should have blocks to automate content with well established conventions e.g.:
+
+- authentication
+- introspection
+
+## Guides GraphQL Documents
+
+Authors should be able to write guides with a rich GraphQL document code block to give examples. Document block features might include e.g.:
+
+- Select client type to render with (Native, GenQL, Graffle, cURL, etc.)
+- Fields linked to reference, even across all client types
+- Turn into an intant inline playground to run and edit
+
+## Playgrounds
+
+GraphiQL gives the community a foundation for playground experiences. Building on top of that, developers should be able to:
+
+- Have automated tokens based on login and project/environment context
+- Save and organize documents, share with team
+- Navigate to reference like with guide GQL document blocks or open inline
+
+# Prototype
+
+We have been experimenting in the open with some of these ideas in a prototype JS framework called Polen.
+
+You can already check it out at https://polen.js.org where you can see docs and demos.
+
+## Features
+
+It has basic support for some features like:
+
+- Guides content
+- Reference linked GraphQL document code blocks
+- Schema versions and revisiions
+- SSG and SSR builds
+- Schema descriiption augmentations
+
+## Technical Approach
+
+The core of our prototype is Vite (with Rolldown), a tool that lowers the bar to creating domain specific frameworks. It strikes a balance between being a clean low level abstraction but also high level enough to avoid reinvdenting any major wheels.
+
+Other major components include:
+
+- Radix Themes
+- React
+- React Router
+- Code Hike
+- Tree Sitter
+- Hono
+- Effect
+- Future: RSC (React Server Components), PandaCSS
+
+## Learnings Along The Way
+
+### Rehype, Remark, … Regraph?
+
+Remark makes Markdown extensible while rehype does the same for HTML.
+
+Conversely, we don’t seem to have a widespread project that allows building rich custom experiences over GraphQL document ASTs.
+
+We built an interactive GraphQL document code block using the Tree Sitter and graphql packages. Maybe there's an opportunity to generalize this work towoard something like Remark and Rehype.
+
+### Vite
+
+- Great, we still think the right choice, but not a free lunch
+- Building a framework is still a deep domain in a rapidly changing ecosystem, e.g.:
+  - during our work the Vite community progressed toward an RSC plugin that would significantly simplify implementation aspects of framework's wishing to offer server features to their users like we want to do with Polen.
+  - Another major ongoing effort to unify development and production bundling pipelines of which Rolldown (a Rust Rollup) is part of
+
+# What’s next?
+
+- No concrete plans for Polen yet
+- Do try it out and give us feedback or even contribute on GitHub
+- Most importantly let's continue to push the state of the art of docs forward, like GraphQL did almost 10 years ago when GraphiQL raised the bar on just how good baseline tooling in an API community could be.
+
+# Thanks!

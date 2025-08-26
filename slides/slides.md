@@ -23,9 +23,9 @@ layout: statement
 
 <div style="text-align: left;">
 
-## `Part 1` Discovering Graffle
+## `Part 1` Ideas
 
-## `Part 2` TypeScript Techniques
+## `Part 2` Prototype
 
 </div>
 
@@ -33,7 +33,7 @@ layout: statement
 layout: statement
 ---
 
-# `Part 1` <br> Discovering Graffle
+# `Part 1` <br> ideas
 
 ---
 

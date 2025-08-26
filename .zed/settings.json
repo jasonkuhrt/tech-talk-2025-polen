@@ -2,11 +2,11 @@
   "languages": {
     // formatting broken with slidev multiple frontmatters
     "Markdown": {
-      "formatter": {
-        "external": {
-          "command": "echo 'disabled'"
-        }
-      }
+      // "formatter": {
+      //   "external": {
+      //     "command": "echo 'disabled'"
+      //   }
+      // }
     }
   }
 }
