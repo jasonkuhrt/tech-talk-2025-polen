@@ -1,4 +1,4 @@
----
+```yaml
 theme: apple-basic
 transition: slide-up
 mdc: true
@@ -9,13 +9,41 @@ layout: intro-image-right
 image: /assets/logo.svg
 title: Exploring Advanced Type Level Techniques
 hideInToc: true
----
+```
 
 # Imagining the Future of GraphQL Documentation Tooling
 
 ---
+
+```yaml
 layout: statement
+```
+
+# Introduction
+
+TODO
+
+<!--
+
+- I am an open source developer working at The Guild
+- We have been thinking and experimenting this year on GraphQL API documentation
+- We noticed that the landscape doesn’t have tooling meeting these characteristics
+  - Open Source
+  - GraphQL Native
+  - Actively Maintained
+  - Featureful, e.g.:
+    - Reference Generator
+    - Playground
+    - User/Project Context
+- I’m here to share some thoughts about GraphQL documentation and a prototype we’re calling Polen
+
+-->
+
 ---
+
+```yaml
+layout: statement
+```
 
 # Plan
 
@@ -23,166 +51,311 @@ layout: statement
 
 <div style="text-align: left;">
 
-## `Part 1` Ideas
+## `Part 1` Characteristics
 
 ## `Part 2` Prototype
 
 </div>
 
 ---
+
+```yaml
 layout: statement
----
+```
 
-# `Part 1` <br> ideas
-
----
-
-# What is it?
-
-- A TypeScript library for sending GraphQL requests
-- `npm add graffle@next`
-- Inspirations include Genql and Prisma
-- What makes it special:
-  - Document builder supporting all of GraphQL
-  - Focus on type safety
-  - Modular (e.g. transports)
-
-<img src="./assets/website.png" class="absolute right--90 top--25 scale-70" style="filter: grayscale(0.5)" />
+# `Part 1` <br> Characteristics
 
 ---
+
+```yaml
 layout: statement
----
-
-# Demo Time
-
-<br>
-
-<a class="emoji-link" href="cursor://file//Users/jasonkuhrt/projects/graffle/tech-talk-2024-11/demos/1-gql.ts"><fxemoji-goat /></a>
-
----
-layout: imagetitle: Components Overview
----
-
-<style>
-#slide-container:has(.slidev-page-6:not([style*="display: none"])) {
-  background: black!important;
-}
-#slideshow:has(.slidev-page-6:not([style*="display: none"])) {
-	background: black!important;
-
-  .slidev-layout {
-    padding: 0!important;
-    margin: 0!important;
-  }
-}
-
-</style>
-
-<img src="./assets/components.png" class="h-full ml-auto mr-auto" style="display:block;filter: invert(1) hue-rotate(280deg);" />
-
----
-layout: two-cols-header
----
-
-# Is it <strike>done</strike> production ready?
-
-- No (but maybe good enough for you?)
-- Continuous pre-releases: `pnpm add graffle@next`
-- 500+ tests: unit (type & value level) + E2E
-- Bug fixes prioritized (closed in single digit days)
-
-::left::
-
-## Stable (ish)
-
-- Raw interface
-- Document builder interface
-- Request pipeline
-- Custom Scalars
-
-::right::
-
-## Unstable (ish)
-
-- Extension System
-- Extensions
-- Output configuration
-- CLI
-
----
-
-<style>
-.local .slidev-code {
-  font-size: 1.8rem;
-}
-</style>
-<div class="local">
-
-# What's Next?
-
-### Sustainability
-
-- Handful of one-time donations (Open Collective)
-- Sponsorship by The Guild
-- Decreased hours starting December: 15-20 hours/wk
-
-### Features Etc.
-
 ```
-Currently:
-* feat(extension-system) : Extensible transports
-* improve(perf)          : Reduce bundle size (e.g. web preset, http transport, no memory)
 
-Soon:
-* chore(docs)            : Better documentation (Website, JSDoc)
-* refactor               : Extract anyware package
-* feat(request)          : OneOf, @defer, @stream, subscription
-* improve(types)         : Simplify _appearance of_ public interface types
-* feat(extension/*)      : More: Effect, Cache, BatchRequest ...
-* feat                   : Automated Clients: @graffle/client-github | shopify | cloudflare-queues | yelp
-* feat(extension-system) : Extensible directives
-```
+# (Note) Personas
+
+<div style="text-align: left;">
+
+## Authors -> people building a developer portal
+
+## Developers -> people using the API that the developer portal is about
 
 </div>
 
 ---
+
+# Documentation Kinds
+
+Authors should be able to present with different kinds of documentation.
+
+1. Guides:
+   - Topic oriented (getting started, authorization, etc.)
+   - Coarse grained
+   - Typically manually written
+   - ultimately free form
+2. Examples:
+   - Task oriented (how to do X with Y)
+   - Medium grained (practical, link between guides and reference)
+   - Typically manually written
+3. Reference:
+   - Interface oriented (inputs, outputs, etc.)
+   - Fine grained
+   - Typically generated in part or whole from a schema
+
+---
+
+# Relatable Content
+
+Authors should be able to easily manage connections between content kinds.
+
+- Reference-to-Guide: Reference docs for GraphQL fields sensitive to authorization include connections to a guide about authorization
+- Guide-to-Example: An authorization guide includes connections to examples that implicate authorization
+- etc.
+
+---
+
+# Developer Context
+
+It is common for APIs to have large surface areas used in different ways by developers.
+
+A developer should be able to filter, highlight, etc. content that is relevant to their projects.
+
+A developer should be able to sign into the docs and select among their projects/environments to peruse the documentation in a way useful to them. For example:
+
+In reference:
+
+- Focus reference to types, fields, etc. used in actual requests
+- See request metrics next to types, fields etc.
+  In playground:
+  - Automated token management
+  - Save documents for later use and reference
+    In examples:
+  - Lead with client kind that is actually in use by the project
+    In general:
+- Pin content for fast access: reference paths, examples, saved playground documents, etc.
+
+---
+
+# Developer Collaboration
+
+Building on top of context, developers should be able to share context across a team, e.g. saved documents or pins.
+
+---
+
+# Abstraction Levels
+
+Authors should be able to adopt a tool at their desired abstraction level, each level building upon the former.
+
+1. Libraries
+   - Building blocks
+   - Use cases: Brown field, incremental adoption, tangental goals
+   - Benefits: Control, flexibility, radical customization
+   - Blocks: Provided
+   - Approach: Owned
+   - Deployment: Owned
+2. Framework
+   - Opinionated library composition
+   - Use cases: Green field, prototypes, MVPs, content focused teams
+   - Benefit: Rapid development (use a cow path), easy upgrades (declarative means intent is decoupled from implementation)
+   - Audience: Content focused teams
+   - Blocks: Provided
+   - Approach: Provided
+   - Deployment: Author
+3. SaaS
+   - Turn key hosted solution
+   - Use cases: Framework + zero ops
+   - Benefit: Zero ops, focus on content, ultra rapid development, preview deployments, GitHub integration, etc.
+   - Blocks: Provided
+   - Approach: Provided
+   - Deployment: Provided
+
+---
+
+# Architecture Kinds
+
+Authors should be able to choose the architecture that best fits their needs. If they are using developer context features a portable server should easily available, but if they aren't using such features, they should be able to shed the server.
+
+1. SSG
+   - Static HTML pages
+   - Deployment: static
+   - Benefits: SEO, serverless
+   - Use cases: Public documentation
+2. SPA
+   - Client Application
+   - Deployment: static
+   - Benefits: serverless, fast simple builds
+   - Use cases: Prototypes, internal docuentation
+3. SSR
+   - Server+Client Application
+   - Benefits: SEO, Developer context and collaboration features
+
+---
+
+# Reference Addressability
+
+Reference should be deeply addressable e.g. a default value at argument at field at type at API version.
+
+---
+
+# Reference Views
+
+Reference should be viewable in different ways playing to different strengths.
+
+1. Graph
+   - Feeling: Workbench, Macro, top of the mountain, surveying the landscape
+   - Good for: Exploration, building schema-level mental model, discover relationships, themes, understand dense and sparse spots
+2. Tree
+   - Feeling: Workbench, Micro, Starting from a trailhead, walking along paths
+   - Good for: Drilling, building type-level mental model
+3. Page
+   - Feeling: familiar, focused, stable
+   - Good for: addressability, sharing, saving
+
+---
+
+# Reference Augmentations
+
+Authors should be empowered to add/change descriptions on schema elements.
+
+Motivations may include:
+
+- arbitrary experimentation
+- temporary hot fixes
+- localization
+- A/B testing
+- interactive features
+
+---
+
+# API Versioning
+
+Authors should be able to present different versions of their API.
+
+Even if GraphQL reduces the need for API versioning, authors should not be cornered in on this topic.
+
+---
+
+# API Revisions
+
+Authors should be able to show their developers a timeline of API changes. Motivation: help developers stay confident and informed about the API.
+
+Revisions should be:
+
+- Connected with reference, e.g.:
+  - "Field foo added in revision bar"
+  - If breaking changes within revisions, possibility of ghosted fields/types/etc. for posterity
+- Categorized e.g.:
+  - breaking
+  - non-breaking
+
+---
+
+# Guides Boilerplate
+
+Authors should have blocks to automate content with well established conventions e.g.:
+
+- authentication
+- introspection
+
+---
+
+# Guides GraphQL Documents
+
+Authors should be able to write guides with a rich GraphQL document code block to give examples. Document block features might include e.g.:
+
+- Select client type to render with (Native, GenQL, Graffle, cURL, etc.)
+- Fields linked to reference, even across all client types
+- Turn into an intant inline playground to run and edit
+
+---
+
+# Playgrounds
+
+GraphiQL gives the community a foundation for playground experiences. Building on top of that, developers should be able to:
+
+- Have automated tokens based on login and project/environment context
+- Save and organize documents, share with team
+- Navigate to reference like with guide GQL document blocks or open inline
+
+---
+
+```yaml
 layout: statement
----
+```
 
-# `Part 2` <br> TypeScript Techniques
+# `Part 2` <br> Prototype
 
-<div class="inline-flex flex-row gap-4">
-  <a class="emoji-link" href="cursor://file//Users/jasonkuhrt/projects/graffle/tech-talk-2024-11/techniques/1-global-augmentation/main.ts"><fxemoji-wolfface /></a>
-  <a class="emoji-link" href="cursor://file//Users/jasonkuhrt/projects/graffle/tech-talk-2024-11/techniques/2-type-level-functions/main.ts"><fxemoji-octopus /></a>
-  <a class="emoji-link" href="cursor://file//Users/jasonkuhrt/projects/graffle/tech-talk-2024-11/techniques/3-recursive-builder/main.ts"><fxemoji-dragonside /></a>
-  <a class="emoji-link" href="cursor://file//Users/jasonkuhrt/projects/graffle/tech-talk-2024-11/techniques/4-type-testing/examples.md"><fxemoji-honeybee /></a>
-</div>
+<!--
+- We have been experimenting in the open with some of these ideas in a prototype JS framework called Polen.
 
----
-
-# Ways You Might Improve Your TypeScript Skills
-
-- Write library code
-- Ask questions on ... (leverage [TypeScript Bug Workbench](https://www.typescriptlang.org/dev/bug-workbench/))
-  - Stack Overflow, often answered by [jcalz](https://stackoverflow.com/users/2887218/jcalz)
-  - [TypeScript Discord](https://discord.com/invite/typescript)
-  - [ArkType Discord](https://discord.com/invite/xEzdc3fJQC) ([David Blass](https://github.com/ssalbdivad))
-  - [Effect Discord](https://discord.com/invite/effect-ts)
-- Read some articles (scattered, ad-hoc)
-  - Andrea Simone Costa https://andreasimonecosta.dev/posts/
-  - Sandro Maglione https://sandromaglione.com
-- Read source code of libraries you use e.g. [TypeFest](https://github.com/sindresorhus/type-fest), [Zod](https://github.com/colinhacks/zod), [ArkType](https://github.com/arktypeio/arktype), [Graffle](https://github.com/graffle-js/graffle), [Effect](https://github.com/Effect-TS/effect), ...
+- You can already check it out at https://polen.js.org where you can see docs and demos.
+-->
 
 ---
+
+# Features
+
+It has basic support for some features like:
+
+- Guides content
+- Reference linked GraphQL document code blocks
+- Schema versions and revisiions
+- SSG and SSR builds
+- Schema descriiption augmentations
+
+---
+
+# Technical Approach
+
+The core of our prototype is Vite (with Rolldown), a tool that lowers the bar to creating domain specific frameworks. It strikes a balance between being a clean low level abstraction but also high level enough to avoid reinvdenting any major wheels.
+
+Other major components include:
+
+- Radix Themes
+- React
+- React Router
+- Code Hike
+- Tree Sitter
+- Hono
+- Effect
+- Future: RSC (React Server Components), PandaCSS
+
+---
+
+# Learnings Along The Way
+
+---
+
+# Rehype, Remark, … Regraph?
+
+Remark makes Markdown extensible while rehype does the same for HTML.
+
+Conversely, we don’t seem to have a widespread project that allows building rich custom experiences over GraphQL document ASTs.
+
+We built an interactive GraphQL document code block using the Tree Sitter and graphql packages. Maybe there's an opportunity to generalize this work towoard something like Remark and Rehype.
+
+---
+
+# Vite
+
+- Great, we still think the right choice, but not a free lunch
+- Building a framework is still a deep domain in a rapidly changing ecosystem, e.g.:
+  - during our work the Vite community progressed toward an RSC plugin that would significantly simplify implementation aspects of framework's wishing to offer server features to their users like we want to do with Polen.
+  - Another major ongoing effort to unify development and production bundling pipelines of which Rolldown (a Rust Rollup) is part of
+
+---
+
+# What’s next?
+
+- No concrete plans for Polen yet
+- Do try it out and give us feedback or even contribute on GitHub
+- Most importantly let's continue to push the state of the art of docs forward, like GraphQL did almost 10 years ago when GraphiQL raised the bar on just how good baseline tooling in an API community could be.
+
+---
+
+k
+
+```yaml
 layout: statement
----
+```
 
-# Questions? <fxemoji-spurtingwhale class="animate" />
-
-Thanks for listening!
-
-https://github.com/graffle-js/tech-talk-2024-11
-
-https://graffle.js.org
-
-https://bsky.app/profile/kuhrt.me
+# Thanks!
