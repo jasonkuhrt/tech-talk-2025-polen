@@ -6,7 +6,7 @@ overviewSnapshots: true
 fonts:
   sans: Inter
 layout: intro-image-right
-image: /assets/logo.svg
+image: /assets/polen-logo.svg
 title: Exploring Advanced Type Level Techniques
 hideInToc: true
 ```
@@ -15,15 +15,7 @@ hideInToc: true
 
 ---
 
-```yaml
-layout: statement
-```
-
 # Introduction
-
-TODO
-
-<!--
 
 - I am an open source developer working at The Guild
 - We have been thinking and experimenting this year on GraphQL API documentation
@@ -37,8 +29,6 @@ TODO
     - User/Project Context
 - I’m here to share some thoughts about GraphQL documentation and a prototype we’re calling Polen
 
--->
-
 ---
 
 ```yaml
@@ -46,8 +36,6 @@ layout: statement
 ```
 
 # Plan
-
-30 minutes
 
 <div style="text-align: left;">
 
@@ -84,6 +72,8 @@ layout: statement
 ---
 
 # Documentation Kinds
+
+<img src="./assets/macro-micro-docuentation-kinds.svg" style="width:300px;" />
 
 Authors should be able to present with different kinds of documentation.
 
@@ -351,8 +341,6 @@ We built an interactive GraphQL document code block using the Tree Sitter and gr
 - Most importantly let's continue to push the state of the art of docs forward, like GraphQL did almost 10 years ago when GraphiQL raised the bar on just how good baseline tooling in an API community could be.
 
 ---
-
-k
 
 ```yaml
 layout: statement
