@@ -1,43 +1,44 @@
 :root {
-	--slidev-slide-container-background: #121212;
-	--slidev-theme-primary: white;
+  --slidev-slide-container-background: #121212;
+  --slidev-theme-primary: white;
 
-	--prism-font-size: 1em;
-	--prism-line-height: 0.8;
-	--slidev-code-line-height: 0;
+  --prism-font-size: 1em;
+  --prism-line-height: 0.8;
+  --slidev-code-line-height: 0;
 }
 
 .slidev-code {
-	--slidev-code-background: #1b1b1f;
+  --slidev-code-background: #1b1b1f;
 }
 
 .shiki {
-	background: hsla(0, 0%, 0%, 0.10)!important;
+  background: hsla(0, 0%, 0%, 0.1) !important;
 }
 .shiki .line {
-	display: block;
+  display: block;
 }
 
 /* html.dark #slideshow {
 } */
 
 ._col {
-	display: flex;
-	flex-direction: column;
-	min-height: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
 }
 
 h1 {
-	line-height: 1.5!important;
+  line-height: 1.5 !important;
+  font-size: 2.5rem !important;
 }
 
 .emoji-link {
-	border-bottom: none!important;
-	font-size: 3rem;
+  border-bottom: none !important;
+  font-size: 3rem;
 }
 
 .emoji-link:hover {
-	filter: hue-rotate(280deg);
+  filter: hue-rotate(280deg);
 }
 
 @keyframes hue-rotate {
@@ -54,5 +55,5 @@ h1 {
 }
 
 a {
-	border-bottom-color: hsla(0, 0%, 100%, 0.3)!important;
+  border-bottom-color: hsla(0, 0%, 100%, 0.3) !important;
 }

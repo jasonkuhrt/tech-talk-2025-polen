@@ -9,13 +9,18 @@ layout: intro-image-right
 image: /assets/polen-logo.svg
 title: Exploring Advanced Type Level Techniques
 hideInToc: true
+colorSchema: dark
 ```
 
-# Imagining the Future of GraphQL Documentation Tooling
+# Imagining Futures of GraphQL Documentation Tooling
 
 ---
 
-# Introduction
+```yaml
+layout: none
+```
+
+# 👋
 
 - I am an open source developer working at The Guild
 - We have been thinking and experimenting this year on GraphQL API documentation
