@@ -1,5 +1,5 @@
 :root {
-  --slidev-slide-container-background: #121212;
+  --slidev-slide-container-background: #1e1e1e;
   --slidev-theme-primary: white;
 
   --prism-font-size: 1em;
@@ -7,8 +7,27 @@
   --slidev-code-line-height: 0;
 }
 
+.slidev-slide-content {
+  background-color: var(--slidev-slide-container-background) !important;
+}
+
 .slidev-code {
   --slidev-code-background: #1b1b1f;
+}
+
+.slidev-layout.center {
+  text-align: center;
+}
+.slidev-layout.center img {
+  display: inline-block;
+}
+
+.slidev-layout.statement {
+  background-color: #e1e1e1 !important;
+  color: #1e1e1e !important;
+}
+.slidev-layout.statement img {
+  filter: invert();
 }
 
 .shiki {
