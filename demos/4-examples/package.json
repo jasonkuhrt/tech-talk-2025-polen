@@ -1,0 +1,11 @@
+{
+  "name": "pokemon-api",
+  "type": "module",
+  "scripts": {
+    "dev": "polen dev",
+    "build": "polen build"
+  },
+  "dependencies": {
+    "polen": "workspace:*"
+  }
+}

@@ -1,0 +1,16 @@
+lockfileVersion: '9.0'
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
+overrides:
+  polen: link:../../../../../Library/pnpm/global/5/node_modules/polen
+
+importers:
+
+  .:
+    dependencies:
+      polen:
+        specifier: link:../../../../../Library/pnpm/global/5/node_modules/polen
+        version: link:../../../../../Library/pnpm/global/5/node_modules/polen
