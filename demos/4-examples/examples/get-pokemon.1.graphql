@@ -1,7 +1,0 @@
-query GetPokemonV1 {
-    pokemon(id: "025") {
-        id
-        name
-        type
-    }
-}

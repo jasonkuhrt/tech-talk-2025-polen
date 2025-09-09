@@ -1,0 +1,23 @@
+# Level up a Pokemon
+mutation LevelUpPokemon {
+  levelUpPokemon(id: "025") {
+    id
+    name
+    level
+    stats {
+      hp
+      attack
+      defense
+      speed
+      specialAttack
+      specialDefense
+    }
+    # Check if any new moves were learned
+    moves {
+      id
+      name
+      type
+      power
+    }
+  }
+}

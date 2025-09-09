@@ -1,0 +1,18 @@
+# Trade Pokemon between trainers
+mutation TradePokemon {
+  tradePokemon(
+    pokemonId: "025"
+    fromTrainerId: "ash"
+    toTrainerId: "misty"
+  ) {
+    id
+    name
+    # Shows updated trainer ownership
+    trainer {
+      id
+      name
+    }
+    types
+    level
+  }
+}

@@ -1,0 +1,24 @@
+# Search for Pokemon by name
+query SearchPokemon {
+  searchPokemon(name: "pika") {
+    edges {
+      node {
+        id
+        name
+        types
+        level
+        isShiny
+        stats {
+          hp
+          attack
+          defense
+          speed
+        }
+      }
+    }
+    pageInfo {
+      hasNextPage
+      hasPreviousPage
+    }
+  }
+}

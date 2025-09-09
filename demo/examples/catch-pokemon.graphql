@@ -1,0 +1,20 @@
+# Catch a wild Pokemon
+mutation CatchPokemon {
+  catchPokemon(pokemonId: "133", trainerId: "ash") {
+    id
+    name
+    types
+    level
+    stats {
+      hp
+      attack
+      defense
+      speed
+    }
+    moves {
+      name
+      type
+      power
+    }
+  }
+}

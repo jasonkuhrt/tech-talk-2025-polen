@@ -1,0 +1,12 @@
+{
+  "name": "Pokemon API",
+  "description": "Catch, train, and battle with Pokemon through our comprehensive GraphQL API",
+  "type": "module",
+  "scripts": {
+    "dev": "polen dev",
+    "build": "polen build"
+  },
+  "dependencies": {
+    "polen": "link:../../../../../Library/pnpm/global/5/node_modules/polen"
+  }
+}

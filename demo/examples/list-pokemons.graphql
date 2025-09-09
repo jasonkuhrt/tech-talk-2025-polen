@@ -1,0 +1,22 @@
+# List Pokemon with filtering by type
+query ListPokemons {
+  pokemons(type: ELECTRIC, limit: 10) {
+    edges {
+      node {
+        id
+        name
+        types
+        level
+        stats {
+          hp
+          attack
+          defense
+        }
+      }
+    }
+    pageInfo {
+      hasNextPage
+      hasPreviousPage
+    }
+  }
+}

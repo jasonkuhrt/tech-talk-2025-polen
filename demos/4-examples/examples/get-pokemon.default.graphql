@@ -1,8 +1,0 @@
-query GetPokemon {
-    pokemon(id: "025") {
-        id
-        name
-        types
-        # Basic info suitable for all API versions
-    }
-}

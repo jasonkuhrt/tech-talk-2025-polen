@@ -32,6 +32,10 @@ defaults:
 
 ---
 
+<img src="./assets/research.png" style="width:100%" />
+
+---
+
 # Re Personas
 
 <img src="./assets/developers-authors.png" style="width:450px;" />
