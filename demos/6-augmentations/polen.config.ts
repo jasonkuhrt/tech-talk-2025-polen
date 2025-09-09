@@ -4,12 +4,8 @@ export default defineConfig({
   schema: {
     augmentations: [
       {
-        type: 'description',
+        on: 'Query',
         content: 'Custom content from **my portal app** 🌺!',
-        on: {
-          type: 'TargetType',
-          name: 'Query',
-        },
         placement: 'over',
       },
     ],
