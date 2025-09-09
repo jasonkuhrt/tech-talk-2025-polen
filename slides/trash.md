@@ -43,3 +43,29 @@ Authors should be able to write guides with a rich GraphQL document code block t
 - Select client type to render with (Native, GenQL, Graffle, cURL, etc.)
 - Fields linked to reference, even across all client types
 - Turn into an intant inline playground to run and edit
+
+# Work In Progress
+
+::left::
+
+**Pillars**
+
+- Home Page
+- Arbitrary Pages
+- Examples
+- Reference
+- Changelog
+- Build (SSG and SSR)
+- Dev
+
+::right::
+
+**Beams**
+
+- Versions & Revisions
+- Cross References
+- Interactive Documents
+- Schema Description Augmentations
+- Custom Component Code
+
+---

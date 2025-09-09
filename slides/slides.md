@@ -7,7 +7,7 @@ fonts:
   sans: Inter
 layout: intro-image-right
 image: /assets/polen-logo.svg
-title: Exploring Advanced Type Level Techniques
+title: Imagining Futures of GraphQL Documentation Tooling
 hideInToc: true
 colorSchema: dark
 defaults:
@@ -267,6 +267,12 @@ If they are using developer context features a portable server should easily ava
 
 ---
 
+# AI
+
+...
+
+---
+
 ```yaml
 layout: statement
 ```
@@ -286,36 +292,6 @@ https://github.com/the-guild-org/polen
 
 - You can already check it out at https://polen.js.org where you can see docs and demos.
 -->
-
----
-
-```yaml
-layout: two-cols-header
-```
-
-# Work In Progress
-
-::left::
-
-**Pillars**
-
-- Home Page
-- Arbitrary Pages
-- Examples
-- Reference
-- Changelog
-- Build (SSG and SSR)
-- Dev
-
-::right::
-
-**Beams**
-
-- Versions & Revisions
-- Cross References
-- Interactive Documents
-- Schema Description Augmentations
-- Custom Component Code
 
 ---
 
@@ -364,6 +340,6 @@ layout: statement
 
 <img src="./assets/thanks.png" style="width:65px;" />
 
-@kuhrt.me BlueSky
+BlueSky: @kuhrt.me
 
-@jasonkuhrt GitHub
+GitHub: @jasonkuhrt
