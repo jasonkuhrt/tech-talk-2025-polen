@@ -1,0 +1,246 @@
+# Best Practices
+
+Follow these best practices to get the most out of the Pokemon API.
+
+## Efficient Querying
+
+### Request Only What You Need
+
+The `gql:Pokemon` type has many fields, but you should only request the data you actually need:
+
+```graphql interactive
+# ❌ Avoid - Fetches unnecessary data
+query GetPokemonBad {
+  pokemon(id: "025") {
+    id
+    name
+    types
+    stats {
+      hp
+      attack
+      defense
+      specialAttack
+      specialDefense
+      speed
+    }
+    level
+    experience
+    evolution { evolvesTo { name } level condition }
+    abilities { id name description isHidden }
+    moves { id name description type power accuracy pp category }
+    trainer { id name hometown badges }
+    isShiny
+    region
+    generation
+  }
+}
+
+# ✅ Better - Only fetches required fields
+query GetPokemonGood {
+  pokemon(id: "025") {
+    name
+    types
+    stats {
+      hp
+      speed
+    }
+  }
+}
+```
+
+## Pagination Strategies
+
+### Use Cursor-Based Pagination
+
+The `gql:PokemonConnection` type implements the Relay Connection specification. Always use `gql:PokemonEdge.cursor` values rather than offset:
+
+```graphql interactive
+query FirstPage {
+  pokemons(limit: 20) {
+    edges {
+      cursor
+      node {
+        name
+        types
+      }
+    }
+    pageInfo {
+      hasNextPage
+      endCursor
+    }
+  }
+}
+
+# Use the endCursor for the next page
+# query NextPage {
+#   pokemons(limit: 20, after: "cursor_value_here") {
+#     ...
+#   }
+# }
+```
+
+## Filtering Best Practices
+
+### Combine Filters Effectively
+
+The `gql:PokemonFilterInput` input type supports multiple criteria. Use the `gql:PokemonFilterInput.type`, `gql:PokemonFilterInput.minLevel`, and `gql:PokemonFilterInput.region` fields together:
+
+```graphql interactive
+query AdvancedFiltering {
+  pokemons(
+    filter: {
+      type: FIRE
+      minLevel: 30
+      maxLevel: 50
+      region: KANTO
+    }
+    limit: 10
+  ) {
+    edges {
+      node {
+        name
+        level
+        types
+        region
+      }
+    }
+  }
+}
+```
+
+## Caching Strategies
+
+### Cache by ID
+
+The `gql:Query.pokemon` field with an ID argument returns stable data that can be cached aggressively:
+
+```graphql interactive
+# These queries can be cached for a long time
+query GetStaticPokemon {
+  pikachu: pokemon(id: "025") {
+    name
+    types
+    stats { ... }
+  }
+}
+```
+
+### Short Cache for Lists
+
+The `gql:Trainer.pokemon` relationship changes as Pokemon level up, so use shorter cache times:
+
+```graphql interactive
+# Cache for shorter periods (5-15 minutes)
+query GetTrainerPokemon {
+  trainer(id: "ash") {
+    pokemon {
+      name
+      level  # Levels change as Pokemon gain experience
+    }
+  }
+}
+```
+
+## Error Handling
+
+### Handle Null Values
+
+Both `gql:Query.pokemon` and `gql:Query.trainer` can return null if the entity doesn't exist:
+
+```graphql interactive
+query SafeQuery {
+  pokemon(id: "999") {  # Might not exist
+    name
+    evolution {
+      evolvesTo {
+        name
+      }
+    }
+  }
+}
+```
+
+The `gql:Evolution.evolvesTo` field can also be null for Pokemon that don't evolve.
+
+## Performance Tips
+
+### 1. Use Field Aliases for Batch Queries
+
+GraphQL aliases let you query multiple Pokemon in a single request to `gql:Query.pokemon`:
+
+```graphql interactive
+query BatchPokemon {
+  pikachu: pokemon(id: "025") {
+    name
+    types
+  }
+  charizard: pokemon(id: "006") {
+    name
+    types
+  }
+  blastoise: pokemon(id: "009") {
+    name
+    types
+  }
+}
+```
+
+### 2. Avoid Deep Nesting
+
+The `gql:Evolution` type can create deep nesting. Limit your query depth:
+
+```graphql interactive
+# ❌ Too deep
+query TooDeep {
+  trainer(id: "ash") {
+    pokemon {
+      evolution {
+        evolvesTo {
+          evolution {
+            evolvesTo {
+              name
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+# ✅ Better - Flatten with separate queries if needed
+query Flattened {
+  trainer(id: "ash") {
+    pokemon {
+      id
+      name
+      evolution {
+        evolvesTo {
+          id
+          name
+        }
+      }
+    }
+  }
+}
+```
+
+## FAQ
+
+### Q: What's the rate limit for the API?
+A: The API allows 100 requests per minute per IP address. Use caching and batch queries to stay within limits.
+
+### Q: How do I handle Pokemon with multiple forms?
+A: Use the `gql:Pokemon.baseForm` field to identify regional variants and the `gql:Pokemon.region` field to distinguish between them.
+
+### Q: Can I filter by multiple types?
+A: Currently, the `gql:PokemonFilterInput.type` field accepts a single `gql:PokemonType` value. To find Pokemon with specific type combinations, fetch a larger set and filter client-side.
+
+### Q: How often is the Pokemon data updated?
+A: Static Pokemon data (`gql:Pokemon.stats`, `gql:Pokemon.types`, `gql:Pokemon.moves`) is updated with each new game release. The `gql:Trainer` data and `gql:Pokemon.level` values update in real-time.
+
+## Related Resources
+
+- [Getting Started Guide](/guides/getting-started)
+- [API Evolution](/guides/api-evolution)
+- [Interactive Examples](/examples)
+- [Complete API Reference](/reference)
